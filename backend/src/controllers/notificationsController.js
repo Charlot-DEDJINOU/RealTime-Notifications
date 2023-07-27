@@ -24,10 +24,10 @@ exports.createNotification = async (req, res) => {
 
 exports.updateNotification = async (req, res) => {
   const { id } = req.params;
-  const { notification } = req.body;
+  const { notification , lu } = req.body;
   try {
     const updatedNotification = await Notification.update(
-      { notification },
+      { notification , lu },
       { where: { id } } 
     );
     if(updatedNotification) 
@@ -44,7 +44,10 @@ exports.deleteNotification = async (req, res) => {
   const { id } = req.params;
   try {
     const deletedNotification = await Notification.destroy({ where: { id } });
-    res.json({ message: 'Notification supprimée avec succès.' });
+    if(deletedNotification)
+      res.json({ message: 'Notification supprimée avec succès.' });
+    else 
+      res.json({message: 'Echec de suppression'})
   } catch (err) {
     console.error('Erreur lors de la suppression de la notification :', err);
     res.status(500).json({ message: 'Une erreur est survenue lors de la suppression de la notification.' });
