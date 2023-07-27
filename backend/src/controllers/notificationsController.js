@@ -22,6 +22,24 @@ exports.createNotification = async (req, res) => {
   }
 };
 
+exports.updateNotification = async (req, res) => {
+  const { id } = req.params;
+  const { notification } = req.body;
+  try {
+    const updatedNotification = await Notification.update(
+      { notification },
+      { where: { id } } 
+    );
+    if(updatedNotification) 
+      res.json({ message: 'Notification mise à jour avec succès.' });
+    else
+      res.json({ message: 'Echec lors de la mise à jour.' });
+  } catch (err) {
+    console.error('Erreur lors de la mise à jour de la notification :', err);
+    res.status(500).json({ message: 'Une erreur est survenue lors de la mise à jour de la notification.' });
+  }
+};
+
 exports.deleteNotification = async (req, res) => {
   const { id } = req.params;
   try {

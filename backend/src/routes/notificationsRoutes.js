@@ -8,4 +8,6 @@ router.post('/notifications', notificationsController.createNotification);
 
 router.delete('/notifications/:id', notificationsController.deleteNotification);
 
+router.put('/notification/update/:id' , notificationsController.updateNotification);
+
 module.exports = router;

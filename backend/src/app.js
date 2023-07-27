@@ -16,14 +16,10 @@ const notificationsRoutes = require('./routes/notificationsRoutes');
 const usersRoutes = require('./routes/usersRoutes');
 
 app.use(express.json());
-app.use(cors)
+app.use(cors())
 
 app.use('/api', notificationsRoutes);
 app.use('/api', usersRoutes);
-
-app.get('/api',(res , req) => {
-  res.json({"message" : "Bonjour chers tous"}) ;
-})
 
 const PORT = 3001;
 app.listen(PORT, () => {
