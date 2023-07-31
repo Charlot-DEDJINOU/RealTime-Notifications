@@ -1,5 +1,6 @@
 const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
+const ADD_NOTIFICATIONS = 'ADD_NOTIFICATIONS';
 
 // Action creators
 export const addNotification = (message) => ({
@@ -10,6 +11,11 @@ export const addNotification = (message) => ({
 export const removeNotification = (id) => ({
   type: REMOVE_NOTIFICATION,
   payload: id,
+});
+
+export const addNotifications = (messages) => ({
+  type: ADD_NOTIFICATIONS,
+  payload: messages,
 });
 
 // Initial state
@@ -30,6 +36,12 @@ const notificationsReducer = (state = initialState, action) => {
         ...state,
         notifications: state.notifications.filter((notif) => notif.id !== action.payload),
       };
+    case ADD_NOTIFICATIONS:
+      console.log("recu");
+      return {
+        ...state,
+        notifications: action.payload ,
+      }
     default:
       return state;
   }
